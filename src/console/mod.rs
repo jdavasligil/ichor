@@ -2,48 +2,12 @@
 // MIT License
 // Copyright (c) 2023 Jaedin Davasligil
 
-mod console;
-use console::interactive_console;
-use std::env;
+mod user_input;
+use user_input::input;
 
-// The application can run in one of two modes:
-// Auto - Automatically generates everything;
-// Interactive - Runs as a console application.
-enum AppMode {
-    Auto,
-    Interactive,
-}
-
-const DEFAULT_MODE: AppMode = AppMode::Interactive;
-
-fn main() {
-    let args: Vec<String> = env::args().collect();
-    let mut mode: AppMode = DEFAULT_MODE; 
-
-    match args.len() {
-        // No arguments are passed.
-        1 => {
-            // Do nothing.
-        },
-        // One or more arguments are passed.
-        _ => {
-            if args[1].eq_ignore_ascii_case("i") {
-                mode = AppMode::Interactive;
-            }
-            else if args[1].eq_ignore_ascii_case("a") {
-                mode = AppMode::Auto;
-            }
-        }
-    }
-
-    match mode {
-        AppMode::Auto => {
-            println!("Auto is a WIP!");
-        }
-        AppMode::Interactive => {
-            interactive_console();
-        }
-    }
+pub fn interactive_console() {
+    let line = input("$ ");
+    println!("You typed: {}", line);
 }
 
 
