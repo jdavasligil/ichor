@@ -2,9 +2,41 @@
 // MIT License
 // Copyright (c) 2023 Jaedin Davasligil
 
+use std::env;
 
+// The application can run in one of two modes:
+// Auto - Automatically generates everything;
+// Interactive - Runs as a console application.
+enum AppMode {
+    Auto,
+    Interactive,
+}
+
+// Arguments:
+// 1. Mode - i or blank = Interactive, a = Auto.
 fn main() {
-    println!("Hello, world!");
+    let args: Vec<String> = env::args().collect();
+    let mut mode: AppMode = AppMode::Auto;
+
+    match args.len() {
+        // No arguments are passed.
+        1 => {
+            println!("No args.");
+        },
+        // One or more arguments are passed.
+        _ => {
+            if args[1].eq_ignore_ascii_case("i") {
+                mode = AppMode::Interactive;
+            }
+            println!("Mode is passed.");
+        }
+    }
+    match mode {
+        AppMode::Auto => {
+        }
+        AppMode::Interactive => {
+        }
+    }
 }
 
 
