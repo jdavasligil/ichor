@@ -6,8 +6,28 @@ mod user_input;
 use user_input::input;
 
 pub fn interactive_console() {
-    let line = input("$ ");
-    println!("You typed: {}", line);
+    let mut line: String; 
+
+    loop {
+        line = input("$ ");
+        line.make_ascii_uppercase();
+
+        match line.as_str() {
+            "Q" | "QUIT" => {
+                break;
+            },
+            "H" | "HELP" => {
+                print_help();
+            },
+            _ => {
+                println!("Command does not exist. Type 'h' or 'help' for help.");
+            }
+        }
+    }
+}
+
+fn print_help() {
+    println!("Help");
 }
 
 
